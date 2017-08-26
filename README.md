@@ -3,4 +3,4 @@ This is my work at Stanford AI Lab as a visiting scholar, which is advised by Ch
 
 # Coming Soon!!
 
-<img src="https://github.com/yunishi3/Fully-Convolutional-AutoEncoding-GAN-for-3D-Multi-Object-Scene/blob/master/Images/Interpolation.gif" width="800">
+<img src="https://github.com/yunishi3/Fully-Convolutional-AutoEncoding-GAN-for-3D-Multi-Object-Scene/blob/master/Images/Interpolation.gif" width="500">
