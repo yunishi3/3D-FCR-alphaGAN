@@ -112,12 +112,12 @@ As above figure, alphaGAN architecture worked better than standard fully convolu
 Here is the numerical evaluation of reconstruction performance.
 #### -Intersection over Union(IoU)
 IoU is difined as [5]. The bar chart describes IoU performances of each classes. The line chart describes over all IoU performances.  
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/IoU_class.png">  
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/IoU_class.png" width="800">  
 <img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/IoU_all.png" width="300">  
 
 #### -mean Average Precision(mAP)
 The bar chart and line chart describes same as IoU.  
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/mAP_class.png">  
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/mAP_class.png" width="800">  
 <img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/mAP_all.png" width="300">  
 
 This results gives following considerations.
@@ -132,7 +132,7 @@ The latent space walkthrough gives smooth transitions between scenes.
 
 ### Interpretation of latent space
 This below charts are the 2D represented mapping by SVD of 200 encoded samples. Gray scale gradations are followed to 1D embedding by SVD of centroid coordinates of scenes. Left is fully convolution, right is standard 1D latent vector of 1200 dimension.  
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/latent_space_visualization.png">  
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/latent_space_visualization.png" width="800">  
 This means fully convolution enables the latent space to be related to spatial contexts compare to standard VAE.  
  
 The below figures describe the effects of individual spatial dimensions composed of 5x3x5 as the latent space. The normal distribution noises were given on the indivisual dimension, and the level of change from original scene was represented by red colors.  
