@@ -1,6 +1,6 @@
 # While Editting......
 
-# Fully Convolutional Auto Encoding Generative Adversarial Networks for 3D Multi Object Scenes
+# Fully Convolutional Auto-Encoding Generative Adversarial Networks for 3D Multi Object Scenes
 This repository contains the source code for Fully Convolutional Auto Encoding Generative Adversarial Networks for 3D Multi Object Scenes which is my work at Stanford AI Lab as a visiting scholar.  
 Special thanks to Christopher Choi and Prof. Silvio Savarese.
 
@@ -17,13 +17,14 @@ Special thanks to Christopher Choi and Prof. Silvio Savarese.
 
 ## Overview
 #### ImageImageImageImage  
- The generative models utilizing Generative Adversarial Networks or Variational Autoencoder are one of the hottest topic in deep learning and computer vision. That doesn’t only enable high quality generation, but also has a lot of possibility for representation learning, feature extraction, and applications to some recognition tasks without supervision using probabilistic spaces and manifolds.  
+ The generative models utilizing Generative Adversarial Networks or Variational Auto-Encoder are one of the hottest topic in deep learning and computer vision. That doesn’t only enable high quality generation, but also has a lot of possibility for representation learning, feature extraction, and applications to some recognition tasks without supervision using probabilistic spaces and manifolds.  
  Especially 3D multi object generative models, which allows to synthesize a variety of novel 3D multi objects and recognize the objects including shapes, objects and layouts, should be an extremely important tasks for AR/VR and robotics fields.  
  However, 3D generative models are still less developed. Basic generative models of only single objects are published as [1],[2]. But multi objects are not. Therefore I have tried end-to-end 3D multi object generative models using novel generative adversarial network architectures.
  
 ## Dataset
 I used ground truth voxel data of SUNCG dataset. [3]  
 http://suncg.cs.princeton.edu/  
+  
 I modified this dataset as follows.  
  - Downsized from 240x144x240 to 80x48x80.  
  - Got rid of trimming by camera angles.  
@@ -31,16 +32,16 @@ I modified this dataset as follows.
 
 As a result, over 185K scenes were gathered which has 12 classes (empty, ceiling, floor, wall, window, chair, bed, sofa, table, tvs, furn, objs).  
 #### ImageImageImageImage  
-This dataset is really sparse which means around 92% voxels in this scene are empty class averagely. In addition this dataset has plemty of varieties such as living room, bathroom, restroom, dining room, garage etc.
+This dataset is really sparse which means around 92% voxels in this scene are empty class averagely. In addition, this dataset has plenty of varieties such as living room, bathroom, restroom, dining room, garage etc.
 
 
 
 ## Models
 ### Network Architecture
-The network architecture of this work is fully convolutional auto encoding generative adversarial networks. This is inspired by 3DGAN[1] and alphaGAN[4]. And fully convolution and classifing multi objects are novel architectures.  
+The network architecture of this work is fully convolutional auto- encoding generative adversarial networks. This is inspired by 3DGAN[1] and alphaGAN[4]. And fully convolution and classifing multi objects are novel architectures.  
 #### ImageImageImageImage
-This network combined variatinal auto encoder with generative adversarial network. Also the KL divergence loss of variational auto encoder is replaced with adversarial auto encoder using code-discriminator as alphaGAN architectuires[4]. In this work, the latet space shape is 5x3x5x16 and this is calculated by fully convolution layer.Fully convolution allows to extract features more specifically like semantic segmentation tasks. As a result, fully convolution enables reconstruction performance to get better.  
- Adversarial auto encodind architecture allows to loosen the constraint of distributions and treat this distribution as implicit. As a result, adversarial auto encoder enables reconstruction and generation performance to get better. 
+This network combined variatinal auto-encoder with generative adversarial network. Also the KL divergence loss of variational auto- encoder is replaced with adversarial auto-encoder using code-discriminator as alphaGAN architectuires[4]. In this work, the shape of the latet space is 5x3x5x16 and this is calculated by fully convolution layer. Fully convolution allows to extract features more specifically like semantic segmentation tasks. As a result, fully convolution enables reconstruction performance to get better.  
+ Adversarial auto-encoding architecture allows to loosen the constraint of distributions and treat this distribution as implicit. As a result, adversarial auto-encoder enables reconstruction and generation performance to get better. 
 In addition, generative adversarial network architecture enables reconstruction and generation performance to get better as well.
 
 #### -Encoder
@@ -54,44 +55,36 @@ Code discriminator is same as alphaGAN[4] which has 2 hidden layers of 750 dimen
 
 ### Loss Function　
 * Reconstruction loss  　
-```math
-L_{rec}=\sum _{n}^{class}w_{n}\left( -\gamma x\log \left( x_{rec}\right) -\left( 1-\gamma \right) \left( 1-x\right) \log \left( 1-x_{rec}\right) \right)  
-```
-$w$ is occupancy normalized weights with every batch to weight the importance of small objects. $\gamma $ is a hyperparameter which weights the relative importance of false positives against false negatives.
+<img src="https://latex.codecogs.com/gif.latex?L_{rec}=\sum&space;_{n}^{class}w_{n}\left(&space;-\gamma&space;x\log&space;\left(&space;x_{rec}\right)&space;-\left(&space;1-\gamma&space;\right)&space;\left(&space;1-x\right)&space;\log&space;\left(&space;1-x_{rec}\right)&space;\right)" />  
+
+<img src="https://latex.codecogs.com/gif.latex?w" /> is occupancy normalized weights with every batch to weight the importance of small objects. <img src="https://latex.codecogs.com/gif.latex?\gamma" /> is a hyperparameter which weights the relative importance of false positives against false negatives.
 
 * GAN loss
-```math
-L_{GAN}\left( G\right) =-\log \left( D(x) \right) -\log \left( 1-D(x_{rec})\right) -\log \left( 1-D(x_{gen})\right)
-L_{GAN}\left( D\right) =-\log \left( D(x_{rec}) \right) -\log \left( D(x_{gen}) \right)  
-```
+<img src="https://latex.codecogs.com/gif.latex?L_{GAN}\left(&space;D\right)&space;=-\log&space;\left(&space;D(x)&space;\right)&space;-\log&space;\left(&space;1-D(x_{rec})\right)&space;-\log&space;\left(&space;1-D(x_{gen})\right)" />  
+<img src="https://latex.codecogs.com/gif.latex?L_{GAN}\left(&space;G\right)&space;=-\log&space;\left(&space;D(x_{rec})&space;\right)&space;-\log&space;\left(&space;D(x_{gen})&space;\right)" />  
 
 * Distribution GAN loss
-```math
-L_{cGAN}\left( D\right) =-\log \left( D_{code}(z) \right) -\log \left( 1-D_{code}(z_{enc})\right)
-L_{cGAN}\left( E\right) =-\log \left( D_{code}(z_{enc}) \right)
-```
+<img src="https://latex.codecogs.com/gif.latex?L_{cGAN}\left(&space;D\right)&space;=-\log&space;\left(&space;D_{code}(z)&space;\right)&space;-\log&space;\left(&space;1-D_{code}(z_{enc})\right)" />  
+<img src="https://latex.codecogs.com/gif.latex?L_{cGAN}\left(&space;E\right)&space;=-\log&space;\left(&space;D_{code}(z_{enc})&space;\right)" />
 
 ### Optimization
 * Encoder  
-```math
-\min _{E}\left( L_{cGAN}\left( E\right) +\lambda L_{rec}\right)
-```
+<img src="https://latex.codecogs.com/gif.latex?\min&space;_{E}\left(&space;L_{cGAN}\left(&space;E\right)&space;&plus;\lambda&space;L_{rec}\right)" />  
+
 * Generator  
-```math
-\min _{G}\left( \lambda L_{rec}+L_{GAN}\left( G\right) \right)
-```
+<img src="https://latex.codecogs.com/gif.latex?\min&space;_{G}\left(&space;\lambda&space;L_{rec}&plus;L_{GAN}\left(&space;G\right)&space;\right)" />  
+
 * Dicriminator  
-```math
-\min _{D}\left( L_{GAN}\left( D\right) \right)
-```
+<img src="https://latex.codecogs.com/gif.latex?\min&space;_{D}\left(&space;L_{GAN}\left(&space;D\right)&space;\right)" />
+
 * Code Discriminator  
-```math
-\min _{C}\left( L_{cGAN}\left( D\right) \right)
-```
+<img src="https://latex.codecogs.com/gif.latex?\min&space;_{C}\left(&space;L_{cGAN}\left(&space;D\right)&space;\right)" />  
+
+<img src="https://latex.codecogs.com/gif.latex?\lambda" /> is a hyperparameter which weights the reconstruction loss.
 
 
 ## Experiments
-Adam optimaizer was used for each atchitectures by learning rate 0.0001.
+Adam optimaizer was used for each architectures by learning rate 0.0001.
 This network was trained for 75000 iterations, batch size was 20.
 ### Learning curve???
 ### Visualization
@@ -110,18 +103,18 @@ As above figure, alphaGAN architecture worked better than standard fully convolu
 
 ### Reconstruction Performance
 Here is the numerical evaluation of reconstruction performance.
-#### Intersection over Union(IoU)
+#### -Intersection over Union(IoU)
 #### ImageImageImageImage
 IoU is difined as [5]. 
 
-#### mean Average Precision(mAP)
+#### -mean Average Precision(mAP)
 #### ImageImageImage
 
 
 ## Evaluations
 ### Interpolation
 Here is the interpolation results. Gif image of interpolation is posted on the top of this document.  
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/interpolation.png">  
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/Interpolation.png">  
 The latent space walkthrough gives smooth transitions between scenes.
 
 ### Interpretation of latent space
@@ -139,7 +132,7 @@ This means each spatial dimensions is related to generation of each spaces.
 
 
 ## Installation
- This package requires python2.7. If you don't have fllowing prerequisists, you need to download them using pip, apt-get etc. before downloading the repository.  
+ This package requires python2.7. If you don't have fllowing prerequisists, you need to download them using pip, apt-get etc before downloading the repository.  
  Also at least 12GB GPU memory is required.  
 ### Prerequisists
 * Base  
@@ -165,7 +158,7 @@ This means each spatial dimensions is related to generation of each spaces.
 ```
 
 ### Download
-* Download the repository and go to the directory. 
+* Download the repository and go to the directory.  
 `$ git clone https://github.com/yunishi3/FC-alphaGAN.git`  
 `$ cd FC-alphaGAN`    
 
@@ -179,7 +172,7 @@ This means each spatial dimensions is related to generation of each spaces.
 ### Evaluation
 If you want to use pretrained model, use the following instructions.  
 * Unzip the Checkpoint.
-It contains checkpoint1000000* as confirmation epoch = 100000 
+It contains checkpoint100000* as confirmation epoch = 100000  
 `$ tar xfvz Checkpt.tar.gz`  
 
 Or if you want to evaluate your trained model, you can change confirmation epoch 100000 into your confirmation epoch.
@@ -206,7 +199,7 @@ After execute, you could get ~~~~~~
 
 
 ### Visualization
-In order to visualize thier npy files generated by evaluation process, you need to use python vtk. Please see the [] to know the details of this code. I just modified original code to fit the 3D multi object scene.  
+In order to visualize thier npy files generated by evaluation process, you need to use python vtk. Please see the [] to know the details of this code. I just modified original code to fit the 3D multi object scenes.  
 * Go to the eval directory  
 `$ cd eval`  
 
