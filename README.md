@@ -38,10 +38,10 @@ This dataset is really sparse which means around 92% voxels in this scene are em
 
 ## Models
 ### Network Architecture
-The network architecture of this work is fully convolutional auto- encoding generative adversarial networks. This is inspired by 3DGAN[1] and alphaGAN[4]. And fully convolution and classifing multi objects are novel architectures.  
+The network architecture of this work is fully convolutional auto- encoding generative adversarial networks. This is inspired by 3DGAN[1] and alphaGAN[4]. And fully convolution and classifying multi objects are novel architectures.  
 <img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/NetworkArchitecture.png">  
 
-This network combined variatinal auto-encoder with generative adversarial network. Also the KL divergence loss of variational auto- encoder is replaced with adversarial auto-encoder using code-discriminator as alphaGAN architectuires[4]. In this work, the shape of the latet space is 5x3x5x16 and this is calculated by fully convolution layer. Fully convolution allows to extract features more specifically like semantic segmentation tasks. As a result, fully convolution enables reconstruction performance to get better.  
+This network combined variatinal auto-encoder with generative adversarial networks. Also the KL divergence loss of variational auto- encoder is replaced with adversarial auto-encoder using code-discriminator as alphaGAN architectuires[4]. In this work, the shape of the latet space is 5x3x5x16 and this is calculated by fully convolution layer. Fully convolution allows to extract features more specifically like semantic segmentation tasks. As a result, fully convolution enables reconstruction performance to get better.  
  Adversarial auto-encoding architecture allows to loosen the constraint of distributions and treat this distribution as implicit. As a result, adversarial auto-encoder enables reconstruction and generation performance to get better. 
 In addition, generative adversarial network architecture enables reconstruction and generation performance to get better as well.
 
@@ -58,9 +58,9 @@ Code discriminator is same as alphaGAN[4] which has 2 hidden layers of 750 dimen
 
 ### Loss Functions　
 * Reconstruction loss  　
-<img src="https://latex.codecogs.com/gif.latex?L_{rec}=\sum&space;_{n}^{class}w_{n}\left(&space;-\gamma&space;x\log&space;\left(&space;x_{rec}\right)&space;-\left(&space;1-\gamma&space;\right)&space;\left(&space;1-x\right)&space;\log&space;\left(&space;1-x_{rec}\right)&space;\right)" />  
+	<img src="https://latex.codecogs.com/gif.latex?L_{rec}=\sum&space;_{n}^{class}w_{n}\left(&space;-\gamma&space;x\log&space;\left(&space;x_{rec}\right)&space;-\left(&space;1-\gamma&space;\right)&space;\left(&space;1-x\right)&space;\log&space;\left(&space;1-x_{rec}\right)&space;\right)" />  
 
-<img src="https://latex.codecogs.com/gif.latex?w" /> is occupancy normalized weights with every batch to weight the importance of small objects. <img src="https://latex.codecogs.com/gif.latex?\gamma" /> is a hyperparameter which weights the relative importance of false positives against false negatives.
+	<img src="https://latex.codecogs.com/gif.latex?w" /> is occupancy normalized weights with every batch to weight the importance of small objects. <img src="https://latex.codecogs.com/gif.latex?\gamma" /> is a hyperparameter which weights the relative importance of false positives against false negatives.
 
 * GAN loss
 <img src="https://latex.codecogs.com/gif.latex?L_{GAN}\left(&space;D\right)&space;=-\log&space;\left(&space;D(x)&space;\right)&space;-\log&space;\left(&space;1-D(x_{rec})\right)&space;-\log&space;\left(&space;1-D(x_{gen})\right)" />  
@@ -72,7 +72,7 @@ Code discriminator is same as alphaGAN[4] which has 2 hidden layers of 750 dimen
 
 ### Optimization
 * Encoder  
-<img src="https://latex.codecogs.com/gif.latex?\min&space;_{E}\left(&space;L_{cGAN}\left(&space;E\right)&space;&plus;\lambda&space;L_{rec}\right)" />  
+	<img src="https://latex.codecogs.com/gif.latex?\min&space;_{E}\left(&space;L_{cGAN}\left(&space;E\right)&space;&plus;\lambda&space;L_{rec}\right)" />  
 
 * Generator  
 <img src="https://latex.codecogs.com/gif.latex?\min&space;_{G}\left(&space;\lambda&space;L_{rec}&plus;L_{GAN}\left(&space;G\right)&space;\right)" />  
@@ -90,22 +90,22 @@ Code discriminator is same as alphaGAN[4] which has 2 hidden layers of 750 dimen
 Adam optimaizer was used for each architectures by learning rate 0.0001.
 This network was trained for 75000 iterations, batch size was 20.
 ### Learning curve
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Recons.png" width="100"><img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Gen.png" width="100"><img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Discrim.png" width="100">  
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Code_encode.png" width="100"><img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Code_discrim.png" width="100">  
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Recons.png" width="200"><img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Gen.png" width="200"><img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Discrim.png" width="200">  
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Code_encode.png" width="200"><img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Code_discrim.png" width="200">  
 
 
 ### Visualization
 #### -Reconstruction　　
 Here is the results of reconstruction using encoder and generator.  
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/Reconstruction_result.png">  
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/Reconstruction_Result.png">  
 
-Almost voxels are reconstructed although small objects are disappeared. Numerical evaluation using IoU and mAP is discribed below.  
+Almost voxels are reconstructed although small objects are disappeared. Numerical evaluations using IoU and mAP are discribed below.  
 
 #### -Generation from normal distribution
 Here is the results of generation from normal distribution using generator.  
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/Generation_result.png">  
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/Generation_Result.png">  
 
-As above figure, alphaGAN architecture worked better than standard fully convolutional VAE architecture. But this was not enough to represent realistic scene objects. This is assumed by that encoder was not generalized to the distribution and the probabilistic space was really complicated because of the sparsity of dataset. In order to solve this problem, the probabilistic space should be isolated to each objects and layout.
+As above figure, alphaGAN architecture worked better than standard fully convolutional VAE architecture. But this was not enough to represent realistic scene objects. This is assumed by that encoder was not generalized to the distribution and the probabilistic space was extremely complicated because of the sparsity of dataset. In order to solve this problem, the probabilistic space should be isolated to each objects and layout.
 
 
 ### Reconstruction Performance
@@ -113,16 +113,16 @@ Here is the numerical evaluation of reconstruction performance.
 #### -Intersection over Union(IoU)
 IoU is difined as [5]. The bar chart describes IoU performances of each classes. The line chart describes over all IoU performances.  
 <img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/IoU_class.png">  
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/IoU_all.png">  
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/IoU_all.png" width="300">  
 
 #### -mean Average Precision(mAP)
 The bar chart and line chart describes same as IoU.  
 <img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/mAP_class.png">  
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/mAP_all.png">  
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/mAP_all.png" width="300">  
 
-This results gives following consideration.
+This results gives following considerations.
 * Fully convolution enables reconstruction performance to get better even though the number of dimensions are same.
-* AlphaGAN architectures enables reconstruction performance to get better.
+* AlphaGAN architecture enables reconstruction performance to get better.
 
 ## Evaluations
 ### Interpolation
@@ -133,9 +133,9 @@ The latent space walkthrough gives smooth transitions between scenes.
 ### Interpretation of latent space
 This below charts are the 2D represented mapping by SVD of 200 encoded samples. Gray scale gradations are followed to 1D embedding by SVD of centroid coordinates of scenes. Left is fully convolution, right is standard 1D latent vector of 1200 dimension.  
 <img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/latent_space_visualization.png">  
-This means fully convolution enables the latent space to be related to spatial context compare to standard VAE.  
+This means fully convolution enables the latent space to be related to spatial contexts compare to standard VAE.  
  
-The below figures describe the effect of individual spatial dimensions composed of 5x3x5 as the latent space. The normal distribution noises were given on the indivisual dimension, and the level of change from original scene was represented by red colors.  
+The below figures describe the effects of individual spatial dimensions composed of 5x3x5 as the latent space. The normal distribution noises were given on the indivisual dimension, and the level of change from original scene was represented by red colors.  
 <img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/noise_visualization.png">  
 This means each spatial dimensions is related to generation of each spaces.
 
