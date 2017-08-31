@@ -55,7 +55,7 @@ The basic architecture of discriminator is also similar with 3DGAN[1]. The diffe
 #### -Code Discriminator
 Code discriminator is same as alphaGAN[4] which has 2 hidden layers of 750 dimensions.  
 
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/RefinerNetwork.png">　
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/RefinerNetwork.png" width="800">　
 
 #### -Refiner
 The basic architecrure of refiner is similar with SimGAN[5] which is composed with 4 Resnet blocks. The number of channels is 32 in order to decrease the memory charge.  
@@ -147,7 +147,8 @@ This means each spatial dimensions is related to generation of each positions by
 
 ## Suggestions of future work  
 #### Revise the dataset
-In this work, reconstruction task of auto-encoding worked well, but generation task from random distribution to get novel scenes did not work well. If I didn't use auto-encoding, it was extremely hard to get implicit representation in this dataset'.    
+In this work, reconstruction task by auto-encoder worked well, but generation task from random distribution to get novel scenes did not work well. If I didn't use auto-encoder, it was extremely hard to get implicit representation in this dataset.     
+#### Isolate the latet spaces to single objects and layouts
 
 ## Installation
  This package requires python2.7. If you don't have fllowing prerequisists, you need to download them using pip, apt-get etc before downloading the repository.  
