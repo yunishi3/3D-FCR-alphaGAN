@@ -1,5 +1,3 @@
-# While Editting......
-
 # Fully Convolutional Refined Auto-Encoding Generative Adversarial Networks for 3D Multi Object Scenes
 This repository contains the source code for Fully Convolutional Refined Auto-Encoding Generative Adversarial Networks for 3D Multi Object Scenes which is my work at Stanford AI Lab as a visiting scholar.  
 Special thanks to Christopher Choi and Prof. Silvio Savarese.
@@ -55,7 +53,7 @@ The basic architecture of discriminator is also similar with 3DGAN[1]. The diffe
 #### -Code Discriminator
 Code discriminator is same as alphaGAN[4] which has 2 hidden layers of 750 dimensions.  
 
-<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/RefinerNetwork.png" width="800">　
+<img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/RefinerNetwork.png" width="600">　
 
 #### -Refiner
 The basic architecrure of refiner is similar with SimGAN[5] which is composed with 4 Resnet blocks. The number of channels is 32 in order to decrease the memory charge.  
@@ -94,7 +92,7 @@ The basic architecrure of refiner is similar with SimGAN[5] which is composed wi
 Adam optimaizer was used for each architectures by learning rate 0.0001.
 This network was trained for 75000 iterations except refiner in first, and then refiner was inserted and trained for more 25000 iterations. Batch size was 20 for first training for base networks and 8 for second training for refiner.  
 
-### Learning curve
+### Learning curves
 <img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Recons.png" width="200"><img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Gen.png" width="200"><img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Discrim.png" width="200">  
 <img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Code_encode.png" width="200"><img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/LearningCurve_Code_discrim.png" width="200">  
 
@@ -139,16 +137,11 @@ The latent space walkthrough gives smooth transitions between scenes.
 This below charts are the 2D represented mapping by SVD of 200 encoded samples. Gray scale gradations are followed to 1D embedding by SVD of centroid coordinates of each scenes. Left is fully convolution, right is standard 1D latent vector of 1200 dimension.  
 <img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/latent_space_visualization.png" width="800">  
 This means fully convolution enables the latent space to be related to spatial contexts compare to standard VAE.  
- 
+    
 The below figures describe the effects of individual spatial dimensions composed of 5x3x5 as the latent space. The normal distribution noises were given on the indivisual dimension, and the level of change from original scene is represented by red colors.  
 <img src="https://github.com/yunishi3/FC-alphaGAN/blob/master/Images/noise_visualization.png">  
 This means each spatial dimensions is related to generation of each positions by fully convolution.  
 
-
-## Suggestions of future work  
-#### Revise the dataset
-In this work, reconstruction task by auto-encoder worked well, but generation task from random distribution to get novel scenes did not work well. If I didn't use auto-encoder, it was extremely hard to get implicit representation in this dataset.     
-#### Isolate the latet spaces to single objects and layouts
 
 ## Installation
  This package requires python2.7. If you don't have fllowing prerequisists, you need to download them using pip, apt-get etc before downloading the repository.  
