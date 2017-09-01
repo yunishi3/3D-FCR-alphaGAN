@@ -170,7 +170,8 @@ Following is my environment.
 `$ git clone https://github.com/yunishi3/FC-alphaGAN.git`  
 `$ cd FC-alphaGAN`    
 
-* Unzip the dataset (It would be 57GB)  
+* Download and unzip the dataset (It would be 57GB)  
+`$ wget http://yunishi.s3.amazonaws.com/3D_FCRaGAN/Scenevox.tar.gz`
 `$ tar xfvz Scenevox.tar.gz`
  
 
@@ -178,9 +179,10 @@ Following is my environment.
 `$ python main.py --mode train`  
 
 ### Evaluation
-If you want to use pretrained model, you can use the checkpoint files as following instructions.  
-* Unzip the Checkpoint.
-It contains checkpoint10000* as confirmation epoch = 10000  
+If you want to use pretrained model, you can download the checkpoint files as following instructions.  
+* Download and unzip the Checkpoint.
+It contains checkpoint10000* as confirmation epoch = 10000
+`$ wget http://yunishi.s3.amazonaws.com/3D_FCRaGAN/Checkpt.tar.gz`  
 `$ tar xfvz Checkpt.tar.gz`  
 
 Or if you want to evaluate your trained model, you can replace confirmation epoch 100000 with another confirmation epoch which you want to confirm.
