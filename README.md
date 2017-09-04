@@ -15,7 +15,7 @@ Special thanks to Christopher Choi and Prof. Silvio Savarese.
 
 ## Introduction  
  The generative model utilizing Generative Adversarial Networks or Variational Auto-Encoder is one of the hottest topic in deep learning and computer vision. That doesn’t only enable high quality generation, but also has a lot of possibility for representation learning, feature extraction, and applications to some recognition tasks without supervision using probabilistic spaces and manifolds.  
- Especially 3D multi object generative models, which allow us to synthesize a variety of novel 3D multi objects and recognize the objects including shapes, objects and layouts, should be an extremely important tasks for AR/VR and Graphics fields.  
+ Especially 3D multi object generative models, which allow us to synthesize a variety of novel 3D multi objects and recognize the objects including shapes, objects and layouts, should be an extremely important tasks for AR/VR and graphics fields.  
  However, 3D generative models are still less developed. Basic generative models of only single objects are published as [1],[2]. But multi objects are not. Therefore I have tried end-to-end 3D multi object generative models using novel generative adversarial network architectures.
  
 ## Dataset
@@ -38,7 +38,7 @@ This dataset is extremely sparse which means around 92% voxels averagely in thes
 The network architecture of this work is fully convolutional refined auto-encoding generative adversarial networks. This is inspired by 3DGAN[1], alphaGAN[4] and SimGAN[5]. And fully convolutional layer and classifying multi objects are novel architectures as generative models.  
 <img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/NetworkArchitecture.png">  
 
-This network combined a variational auto-encoder with generative adversarial networks. Also the KL divergence loss of variational auto- encoder is replaced with adversarial auto-encoder using code-discriminator as alphaGAN architectuires[4]. In addition, generated scenes are refined by refiner[5]. In this work, the shape of the latent space is 5x3x5x16 and this is calculated by fully convolutional layer. Fully convolution allows us to extract features more specifically like semantic segmentation tasks. As a result, fully convolution enables reconstruction performance to improve.  
+This network combined a variational auto-encoder with generative adversarial networks. Also the KL divergence loss of variational auto-encoder is replaced with adversarial auto-encoder using code-discriminator as alphaGAN architectuires[4]. In addition, generated scenes are refined by refiner[5]. In this work, the shape of the latent space is 5x3x5x16 and this is calculated by fully convolutional layer. Fully convolution allows us to extract features more specifically like semantic segmentation tasks. As a result, fully convolution enables reconstruction performance to improve.  
  Adversarial auto-encoder allows us to loosen the constraint of distributions and treat this distribution as implicit. Also generator is trained to fool discriminator by generative adversarial network. As a result, this architecture enables reconstruction and generation performance to improve. In addition, refiner allows us to smooth the object shapes and put up shapes to be more realistic visually.
 
 <img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/GeneratorNetwork.png">　　
@@ -55,7 +55,7 @@ Code discriminator is same as alphaGAN[4] which has 2 hidden layers of 750 dimen
 <img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/RefinerNetwork.png" width="600">　
 
 #### -Refiner
-The basic architecrure of refiner is similar with SimGAN[5] which is composed with 4 Resnet blocks. The number of channels is 32 in order to decrease the memory charge.  
+The basic architecrure of refiner is similar to SimGAN[5] which is composed with 4 Resnet blocks. The number of channels is 32 in order to decrease the memory charge.  
 
 ### Loss Functions　
 * Reconstruction loss  
@@ -89,7 +89,7 @@ The basic architecrure of refiner is similar with SimGAN[5] which is composed wi
 
 ## Experiments
 Adam optimizer was used for each of the architectures by learning rate 0.0001.
-This network was trained for 75000 iterations except refiner in first, and then refiner was inserted and trained for more 25000 iterations. Batch size was 20 for first training for base networks and 8 for second training for refiner.  
+This network was trained for 75000 iterations except refiner in first, and then refiner was inserted and trained for more 25000 iterations. Batch size was 20 for first training of the base networks and 8 for second training of the refiner.  
 
 ### Learning curves
 <img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/LearningCurve_Recons.png" width="200"><img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/LearningCurve_Gen.png" width="200"><img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/LearningCurve_Discrim.png" width="200">  
@@ -133,9 +133,10 @@ Here is the interpolation results. Gif image of interpolation is posted on the t
 The latent space walkthrough gives smooth transitions between scenes.
 
 ### Interpretation of latent space
-The charts below are the 2D represented mapping by SVD of 200 encoded samples. Gray scale gradations are followed to 1D embedding by SVD of centroid coordinates of each scenes. Left is fully convolution, right is standard 1D latent vector of 1200 dimension.  
+The charts below are the 2D represented mapping by SVD of 200 encoded samples. Gray scale gradations are followed to 1D embedding by SVD of centroid coordinates of each scene. Left is fully convolution, right is standard 1D latent vector of 1200 dimension.  
 <img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/latent_space_visualization.png" width="800">  
-This means fully convolution enables the latent space to be related to spatial contexts compared to standard VAE.  
+The chart of fully convolution follows 1d embedding of centroid coordinates from lower right to upper left. This means fully convolution enables the latent space to be related to spatial contexts compared to standard VAE.  
+    
     
 The figures below describe the effects of individual spatial dimensions composed of 5x3x5 as the latent space. The normal distribution noises were given on the individual dimension, and the level of change from original scene is represented by red colors.  
 <img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/noise_visualization.png">  
@@ -143,14 +144,14 @@ This means each spatial dimension is related to generation of each positions by 
 
 ## Suggestions of future work
 #### -Revise the dataset
-This dataset is extremely sparse and has plenty of varieties. Floors and small objects are allocated to a huge varieties of positions, also some of the small parts like legs of chairs are disappeared in dataset becouse of the downsizing. That makes predicting latent space too hard. Therefore, it is an important work to revise the dataset like limitting the varieties or adjusting the positions of objects.
+This dataset is extremely sparse and has plenty of varieties. Floors and small objects are allocated to huge varieties of positions, also some of the small parts like legs of chairs broke up in the dataset becouse of the downsizing. That makes predicting latent space too hard. Therefore, it is an important work to revise the dataset like limitting the varieties or adjusting the positions of objects.
 
 #### -Redefine the latent space
-In this work, I defined the latent space with one space which includes all information like shapes and positions of each object. Therefore, some small objects were disappeared in the generated models, a lot of non-realistic objects were generated. In order to solve that, it is an important work to redefine the latent space like isolating it to each object and layouts. However increasing the varieties of objects and taking account into multiple objects are required.
+In this work, I defined the latent space with one space which includes all information like shapes and positions of each object. Therefore, some small objects disappeared in the generated models, and a lot of non-realistic objects were generated. In order to solve that, it is an important work to redefine the latent space like isolating it to each object and layout. However, increasing the varieties of objects and taking account into multiple objects are required in that case.
 
 
 ## Installation
- This package requires python2.7. If you don't have following prerequisites, you need to download them using pip, apt-get etc before downloading the repository.  
+ This package requires python2.7. If you don't have following prerequisites, you need to download them using pip, apt-get etc before downloading this repository.  
  Also at least 12GB GPU memory is required.  
 ### Prerequisites  
 Following is my environment.
@@ -177,7 +178,7 @@ Following is my environment.
 `$ cd 3D-FCR-alphaGAN`    
 
 * Download and unzip the dataset (It would be 57GB)  
-`$ wget http://yunishi.s3.amazonaws.com/3D_FCRaGAN/Scenevox.tar.gz`
+`$ wget http://yunishi.s3.amazonaws.com/3D_FCRaGAN/Scenevox.tar.gz`  
 `$ tar xfvz Scenevox.tar.gz`  
  
 
@@ -191,7 +192,7 @@ It contains checkpoint10000* as confirmation epoch = 10000.
 `$ wget http://yunishi.s3.amazonaws.com/3D_FCRaGAN/Checkpt.tar.gz`  
 `$ tar xfvz Checkpt.tar.gz`  
 
-Or if you want to evaluate your trained model, you can replace confirmation epoch 100000 with another confirmation epoch which you want to confirm.  
+Or if you want to evaluate your trained model, you can replace confirmation epoch 10000 with another confirmation epoch which you want to confirm.  
 
 #### -Evaluate reconstruction performances from test data and make visualization files.
 `$ python main.py --mode evaluate_recons --conf_epoch 100000`  
