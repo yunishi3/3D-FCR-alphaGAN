@@ -5,13 +5,13 @@ Special thanks to Christopher Choi and Prof. Silvio Savarese.
 <img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/Interpolation.gif" width="500">
 
 ### Contents
-0. [Introduction](#Introduction)
-0. [Dataset](#Dataset)
-0. [Models](#Models)
-0. [Experiments](#Experiments)
-0. [Evaluations](#Evaluations)
-0. [Installation](#Installataion)
-0. [References](#References)
+0. [Introduction](##Introduction)
+0. [Dataset](##Dataset)
+0. [Models](##Models)
+0. [Experiments](##Experiments)
+0. [Evaluations](##Evaluations)
+0. [Installation](##Installataion)
+0. [References](##References)
 
 ## Introduction  
  The generative model utilizing Generative Adversarial Networks or Variational Auto-Encoder is one of the hottest topic in deep learning and computer vision. That doesn’t only enable high quality generation, but also has a lot of possibility for representation learning, feature extraction, and applications to some recognition tasks without supervision using probabilistic spaces and manifolds.  
@@ -101,7 +101,7 @@ This network was trained for 75000 iterations except refiner in first, and then 
 Here are the results of reconstruction using encoder and generator and refiner.  
 <img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/Reconstruction_Result.png" width="700">  
 
-Almost all voxels are reconstructed although small objects have disappeared. Also that shapes are refined by refiner. Numerical evaluations using IoU and mAP are discribed below.  
+Almost all voxels are reconstructed although small objects have disappeared. Also that shapes are refined by refiner. Numerical evaluations using IoU and mAP are described below.  
 
 #### -Generation from normal distribution
 Here are the results of generation from normal distribution using generator and refiner.  
@@ -113,7 +113,7 @@ As above figure, FCR-alphaGAN architecture worked better than standard fully con
 ### Reconstruction Performance
 Here are the numerical evaluations of reconstruction performance.
 #### -Intersection over Union(IoU)
-IoU is difined as [6]. The bar chart describes IoU performances of each class. The line chart describes over-all IoU performances.  
+IoU is defined as [6]. The bar chart describes IoU performances of each class. The line chart describes over-all IoU performances.  
 <img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/IoU_class.png" width="800">  
 <img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/IoU_all.png" width="300">  
 
