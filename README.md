@@ -1,6 +1,6 @@
 # Fully Convolutional Refined Auto-Encoding Generative Adversarial Networks for 3D Multi Object Scenes
 This repository contains the source code for Fully Convolutional Refined Auto-Encoding Generative Adversarial Networks for 3D Multi Object Scenes which is my work at Stanford AI Lab as a visiting scholar.  
-Special thanks to Christopher Choi and Prof. Silvio Savarese.
+Special thanks to Christopher Choy and Prof. Silvio Savarese.
 
 <img src="https://github.com/yunishi3/3D-FCR-alphaGAN/blob/master/Images/Interpolation.gif" width="500">
 
