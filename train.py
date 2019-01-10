@@ -70,7 +70,7 @@ def train(n_epochs, learning_rate_G, learning_rate_D, batch_size, mid_flag, chec
 
     Z_tf_sample, vox_tf_sample = fcr_agan_model.samples_generator(visual_size=batch_size)
     sample_vox_tf, sample_refine_vox_tf = fcr_agan_model.refine_generator(visual_size=batch_size)
-    writer=tf.train.SummaryWriter(cfg.DIR.LOG_PATH, sess.graph_def)
+    writer=tf.summary.FileWriter(cfg.DIR.LOG_PATH, sess.graph_def)
     tf.initialize_all_variables().run()
 
     if mid_flag:
