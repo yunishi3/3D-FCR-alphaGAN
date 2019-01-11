@@ -61,7 +61,8 @@ The basic architecrure of refiner is similar to SimGAN[5] which is composed with
 * Reconstruction loss  
 	<img src="https://latex.codecogs.com/gif.latex?L_{rec}=\sum&space;_{n}^{class}w_{n}\left(&space;-\gamma&space;x\log&space;\left(&space;x_{rec}\right)&space;-\left(&space;1-\gamma&space;\right)&space;\left(&space;1-x\right)&space;\log&space;\left(&space;1-x_{rec}\right)&space;\right)" />  
 
-	<img src="https://latex.codecogs.com/gif.latex?w" /> is occupancy normalized weights with every batch to weight the importance of small objects. <img src="https://latex.codecogs.com/gif.latex?\gamma" /> is a hyperparameter which weights the relative importance of false positives against false negatives.
+	<img src="https://latex.codecogs.com/gif.latex?w" /> is occupancy normalized weights with every batch to weight the importance of small objects. <img src="https://latex.codecogs.com/gif.latex?\gamma" /> is a hyperparameter which weights the relative importance of false positives against false negatives.
+
 
 * GAN loss  
 	<img src="https://latex.codecogs.com/gif.latex?L_{GAN}\left(&space;D\right)&space;=-\log&space;\left(&space;D(x)&space;\right)&space;-\log&space;\left(&space;1-D(x_{rec})\right)&space;-\log&space;\left(&space;1-D(x_{gen})\right)" />  
@@ -157,19 +158,19 @@ In this work, I defined the latent space with one space which includes all infor
 Following is my environment.
 * Base  
 ```
- - tensorflow 0.10.0  
- - numpy 1.11.2      
- - easydict 1.6  
+ - tensorflow 1.12.0  
+ - numpy 1.15.1    
+ - easydict 1.9 
 ```
  
 * -Evaluation  
 ```
- - sklearn.metrics 0.15.2  
+ - sklearn.metrics 0.19.2  
 ```
 
 * -Visualization  
 ```
- - vtk 5.8.0   
+ - vtk 8.1.2
 ```
 
 ### Download
@@ -195,7 +196,7 @@ It contains checkpoint10000* as confirmation epoch = 10000.
 Or if you want to evaluate your trained model, you can replace confirmation epoch 10000 with another confirmation epoch which you want to confirm.  
 
 #### -Evaluate reconstruction performances from test data and make visualization files.
-`$ python main.py --mode evaluate_recons --conf_epoch 100000`  
+`$ python main.py --mode evaluate_recons --conf_epoch 10000`  
 
 After execute, you could get the following files in the eval directory.  
  - real.npy : Reference models which are chosen as test data.  
@@ -207,12 +208,12 @@ After execute, you could get the following files in the eval directory.
  - IoU(_refine).csv : Intersection over Union result of this reconstruction models.  
 
 #### -Evaluate the interpolation
-`$ python main.py --mode evaluate_interpolate --conf_epoch 100000`  
+`$ python main.py --mode evaluate_interpolate --conf_epoch 10000`  
 
 After execute, you could get interpolation files like above interpolation results. So many and heavy files would be built.  
 
 #### -Evaluate the effect of individual spatial dimensions
-`$ python main.py --mode evaluate_noise --conf_epoch 100000`  
+`$ python main.py --mode evaluate_noise --conf_epoch 10000`  
 
 After execute, you could get noise files like above interpretation of latent space results. So many and heavy files would be built.  
 
