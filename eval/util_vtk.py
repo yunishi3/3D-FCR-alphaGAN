@@ -33,7 +33,7 @@ def block_generation(cen_size, color):
         polys.InsertCellPoint(pts[i][j])
     cube.SetPoints(points)
     cube.SetPolys(polys)
-    cubeMapper.SetInput(cube)
+    cubeMapper.SetInputData(cube)
     cubeActor.SetMapper(cubeMapper)
 
     # set the colors
